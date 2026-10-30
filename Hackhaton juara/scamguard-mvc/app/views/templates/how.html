@@ -5,9 +5,10 @@
  <h2>Bagaimana SCAMGUARD Bekerja?</h2>
  <p class="sub">SCAMGUARD menganalisis URL dan konten website melalui beberapa tahapan untuk mendeteksi potensi phishing.</p>
  <div class="steps">
-  {% for t, d in [('Masukkan URL','Pengguna memasukkan tautan yang ingin diperiksa melalui halaman pemeriksaan.'),('Validasi dan pengumpulan data','Sistem memeriksa format URL, lalu mengumpulkan data yang dibutuhkan untuk analisis.'),('Analisis risiko','Data diperiksa berdasarkan indikator risiko, seperti struktur URL, kemiripan domain, dan isi halaman.'),('Hasil analisis','Pengguna menerima kategori risiko, indikator yang ditemukan, penjelasan, dan rekomendasi keamanan.')] %}
-  <div class="step"><div class="n">{{ loop.index }}</div><div><b>{{ t }}</b><span>{{ d }}</span></div></div>
+  {% for ic, t, d in [('link','Masukkan URL','Pengguna memasukkan tautan yang ingin diperiksa melalui halaman pemeriksaan.'),('doc','Validasi & Pengumpulan Data','Sistem memeriksa format URL, lalu mengumpulkan data yang dibutuhkan untuk analisis.'),('search','Analisis Risiko','Data diperiksa berdasarkan indikator risiko, seperti struktur URL, kemiripan domain, dan isi halaman.'),('shield','Hasil Analisis','Pengguna menerima kategori risiko, indikator yang ditemukan, penjelasan, dan rekomendasi keamanan.')] %}
+  <div class="step"><div class="n">{{ loop.index }}</div><span class="ico sq">{{ icon(ic) }}</span><div><b>{{ t }}</b><span class="d">{{ d }}</span></div></div>
   {% endfor %}
  </div>
+ <div class="note-box">{{ icon('zap') }}Proses analisis dilakukan secara otomatis dan dalam waktu singkat.</div>
 </div></div>
 {% endblock %}

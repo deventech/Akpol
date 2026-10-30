@@ -2,18 +2,26 @@
 {% block content %}
 <div class="hero"><div class="wrap">
  <div>
-  <h1>Cek Tautan, Hindari Ancaman</h1>
+  <h1>Cek Tautan,<br>Hindari <em>Ancaman</em></h1>
   <p>SCAMGUARD membantu Anda memeriksa keamanan URL dan mendeteksi potensi phishing sebelum Anda mengaksesnya.</p>
   <form class="field" method="post" action="{{ url_for('check.check') }}"><input type="text" name="url" aria-label="URL yang ingin diperiksa" placeholder="Masukkan URL yang ingin diperiksa..." autocomplete="off"><button class="btn">Periksa URL</button></form>
   <div class="safe">{{ icon('shield') }}Cek sekarang, hindari risiko!</div>
  </div>
- <svg class="shield" viewBox="0 0 200 220" aria-hidden="true"><path d="M100 10 20 40v60c0 55 35 90 80 110 45-20 80-55 80-110V40z" fill="#14b8a6" opacity=".18" stroke="#14b8a6" stroke-width="4"/><path d="M100 36 46 56v44c0 38 24 64 54 78 30-14 54-40 54-78V56z" fill="#0f3560" stroke="#5eead4" stroke-width="3"/><g stroke="#5eead4" stroke-width="9" stroke-linecap="round" fill="none"><path d="M88 112l-9 9a14 14 0 0 0 20 20l9-9"/><path d="M112 128l9-9a14 14 0 0 0-20-20l-9 9"/></g></svg>
+ <svg class="shield" viewBox="0 0 400 300" aria-hidden="true">
+  <rect x="40" y="30" width="320" height="200" rx="16" fill="#0f3a66" stroke="#2c5a8c" stroke-width="2"/>
+  <path d="M40 46a16 16 0 0 1 16-16h288a16 16 0 0 1 16 16v16H40z" fill="#164a7c"/>
+  <circle cx="62" cy="46" r="4.5" fill="#5eead4"/><circle cx="78" cy="46" r="4.5" fill="#2c5a8c"/><circle cx="94" cy="46" r="4.5" fill="#2c5a8c"/>
+  <rect x="62" y="84" width="80" height="8" rx="4" fill="#1d4d80"/><rect x="62" y="102" width="56" height="8" rx="4" fill="#1d4d80"/><rect x="62" y="186" width="70" height="24" rx="7" fill="#1db7a6" opacity=".85"/>
+  <g transform="translate(140 62) scale(.9)"><path d="M100 10 20 40v60c0 55 35 90 80 110 45-20 80-55 80-110V40z" fill="#1db7a6" opacity=".2" stroke="#1db7a6" stroke-width="4"/><path d="M100 36 46 56v44c0 38 24 64 54 78 30-14 54-40 54-78V56z" fill="#0f3560" stroke="#5eead4" stroke-width="3"/><g stroke="#5eead4" stroke-width="9" stroke-linecap="round" fill="none"><path d="M88 112l-9 9a14 14 0 0 0 20 20l9-9"/><path d="M112 128l9-9a14 14 0 0 0-20-20l-9 9"/></g></g>
+  <rect x="300" y="180" width="92" height="56" rx="12" fill="#fff"/><circle cx="328" cy="208" r="13" fill="#16995a"/><path d="m322 208 5 5 9-10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="348" y="200" width="32" height="6" rx="3" fill="#cfe0ef"/><rect x="348" y="211" width="22" height="6" rx="3" fill="#cfe0ef"/>
+  <rect x="20" y="120" width="58" height="58" rx="12" fill="#fff"/><rect x="38" y="146" width="22" height="16" rx="3" fill="#0b2a4a"/><path d="M42 146v-5a7 7 0 0 1 14 0v5" stroke="#0b2a4a" stroke-width="3" fill="none"/>
+ </svg>
 </div></div>
 <div class="wrap"><div class="feat">
- <div>{{ icon('zap') }}<b>Analisis Cepat</b><span>Hasil dalam hitungan detik.</span></div>
- <div>{{ icon('shield') }}<b>Deteksi Risiko</b><span>Dari berbagai indikator phishing.</span></div>
- <div>{{ icon('doc') }}<b>Informasi Lengkap</b><span>Kategori risiko, penjelasan, dan rekomendasi.</span></div>
- <div>{{ icon('lock') }}<b>Mudah Digunakan</b><span>Cukup masukkan URL.</span></div>
+ <div><span class="ico">{{ icon('zap') }}</span><b>Analisis Cepat</b><span class="d">Hasil dalam hitungan detik.</span></div>
+ <div><span class="ico">{{ icon('shield') }}</span><b>Deteksi Risiko</b><span class="d">Dari berbagai indikator phishing.</span></div>
+ <div><span class="ico">{{ icon('doc') }}</span><b>Informasi Lengkap</b><span class="d">Kategori risiko, penjelasan, dan rekomendasi.</span></div>
+ <div><span class="ico">{{ icon('lock') }}</span><b>Mudah Digunakan</b><span class="d">Cukup masukkan URL.</span></div>
 </div></div>
 <div style="height:56px"></div>
 {% endblock %}

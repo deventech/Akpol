@@ -2,21 +2,22 @@
 {% block title %}Hasil Pemeriksaan - SCAMGUARD{% endblock %}
 {% block content %}
 {% set C = 276.46 %}
-<div class="wrap pg">
- <a class="back" href="{{ url_for('check.check') }}" style="display:inline-block">&larr; Kembali</a>
- <div class="res">
-  <div class="head {{ r.level }}">
-   <div class="t"><h2>{{ r.name }}<span class="tag">{{ r.tag }}</span></h2><div class="u">{{ r.url }}</div><div class="note">Diperiksa pada {{ r.checked_at }}</div></div>
-   <div class="ring"><svg viewBox="0 0 104 104"><circle cx="52" cy="52" r="44" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="9"/><circle cx="52" cy="52" r="44" fill="none" stroke="var(--c)" stroke-width="9" stroke-linecap="round" stroke-dasharray="{{ C }}" stroke-dashoffset="{{ C * (1 - r.score / 100) }}"/></svg><b>{{ r.score }}<small>Skor Risiko</small></b></div>
-  </div>
-  <div class="two">
-   <div class="card"><h3>Indikator yang ditemukan</h3><ul class="ind">
-    {% for i in r.indicators %}<li>{{ icon('x') }}<span>{{ i.text }}</span></li>
-    {% else %}<li class="ok">{{ icon('ok') }}<span>Tidak ditemukan indikator mencurigakan pada struktur URL.</span></li>{% endfor %}
-   </ul></div>
-   <div class="card"><h3>Penjelasan</h3><p style="font-size:14px">{{ r.explanation }}</p><p class="note" style="margin-top:10px">Pemeriksaan prototipe ini mencakup karakteristik URL. Analisis isi halaman akan ditambahkan pada tahap pengembangan berikutnya.</p></div>
-  </div>
-  <div class="card head {{ r.level }}" style="padding:20px"><div><h3 style="color:var(--c)">Rekomendasi keamanan</h3><p style="font-size:14px">{{ r.recommendation }}</p></div></div>
+{% set tags = {'hi':'Phishing','md':'Waspada','lo':'Minim indikator'} %}
+<div class="wrap pg"><div class="narrow">
+ <a class="back" href="{{ url_for('check.check') }}">&larr; Kembali</a>
+ <div class="head {{ r.level }}">
+  <span class="ico">{{ icon('alert') }}</span>
+  <div class="t"><h2>{{ r.name }}<span class="tag">{{ tags[r.level] }}</span></h2><div class="u">{{ r.url }}</div><div class="note">Diperiksa pada {{ r.checked_at }}</div></div>
+  <div class="ring"><svg viewBox="0 0 108 108"><circle cx="54" cy="54" r="44" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="9"/><circle cx="54" cy="54" r="44" fill="none" stroke="var(--c)" stroke-width="9" stroke-linecap="round" stroke-dasharray="{{ C }}" stroke-dashoffset="{{ C * (1 - r.score / 100) }}"/></svg><b>{{ r.score }}<small>Skor Risiko<br>{{ r.name.replace('Risiko ', '') }}</small></b></div>
  </div>
-</div>
+ <div class="body">
+  {% if r.gambling %}<div class="sect"><div class="warn"><b>Terindikasi situs perjudian online.</b> Kata terdeteksi: {{ r.gambling|join(', ') }}. Situs perjudian tidak otomatis dikategorikan phishing, tetapi tetap berisiko.</div></div>{% endif %}
+  <div class="sect"><h3>Indikator yang Ditemukan</h3><ul class="ind">
+   {% for i in r.indicators %}<li>{{ icon('x') }}<span>{{ i.text }}</span></li>
+   {% else %}<li class="ok">{{ icon('ok') }}<span>Tidak ditemukan indikator mencurigakan pada struktur URL.</span></li>{% endfor %}
+  </ul></div>
+  <div class="sect"><h3>Penjelasan</h3><div class="box">{{ r.explanation }}<p class="note" style="margin-top:8px">Pemeriksaan prototipe ini mencakup karakteristik URL. Analisis isi halaman akan ditambahkan pada tahap berikutnya.</p></div></div>
+  <div class="sect"><div class="rekom {{ r.level }}"><h3>Rekomendasi Keamanan</h3><p>{{ r.recommendation }}</p></div></div>
+ </div>
+</div></div>
 {% endblock %}

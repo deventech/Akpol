@@ -6,3 +6,11 @@ document.querySelectorAll('[data-ex]').forEach(function (b) {
     f.submit();
   });
 });
+// Tombol berubah saat memproses
+document.querySelectorAll('form.field').forEach(function (f) {
+  f.addEventListener('submit', function () {
+    var b = f.querySelector('button');
+    b.textContent = 'Menganalisis...';
+    b.disabled = true;
+  });
+});
