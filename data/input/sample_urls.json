@@ -1,0 +1,21 @@
+{
+  "description": "Sample input for SCAMGUARD dataset pipeline",
+  "urls": [
+    {
+      "url": "https://example.com",
+      "source_category": "legitimate",
+      "source": "manual",
+      "notes": "IANA reserved example"
+    },
+    {
+      "url": "https://www.python.org",
+      "source_category": "legitimate",
+      "source": "manual"
+    },
+    {
+      "url": "https://httpbin.org/html",
+      "source_category": "legitimate",
+      "source": "manual"
+    }
+  ]
+}
