@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="hero"><div class="wrap">
+ <div>
+  <h1>Cek Tautan, Hindari Ancaman</h1>
+  <p>SCAMGUARD membantu Anda memeriksa keamanan URL dan mendeteksi potensi phishing sebelum Anda mengaksesnya.</p>
+  <form class="field" method="post" action="{{ url_for('check.check') }}"><input type="text" name="url" aria-label="URL yang ingin diperiksa" placeholder="Masukkan URL yang ingin diperiksa..." autocomplete="off"><button class="btn">Periksa URL</button></form>
+  <div class="safe">{{ icon('shield') }}Cek sekarang, hindari risiko!</div>
+ </div>
+ <svg class="shield" viewBox="0 0 200 220" aria-hidden="true"><path d="M100 10 20 40v60c0 55 35 90 80 110 45-20 80-55 80-110V40z" fill="#14b8a6" opacity=".18" stroke="#14b8a6" stroke-width="4"/><path d="M100 36 46 56v44c0 38 24 64 54 78 30-14 54-40 54-78V56z" fill="#0f3560" stroke="#5eead4" stroke-width="3"/><g stroke="#5eead4" stroke-width="9" stroke-linecap="round" fill="none"><path d="M88 112l-9 9a14 14 0 0 0 20 20l9-9"/><path d="M112 128l9-9a14 14 0 0 0-20-20l-9 9"/></g></svg>
+</div></div>
+<div class="wrap"><div class="feat">
+ <div>{{ icon('zap') }}<b>Analisis Cepat</b><span>Hasil dalam hitungan detik.</span></div>
+ <div>{{ icon('shield') }}<b>Deteksi Risiko</b><span>Dari berbagai indikator phishing.</span></div>
+ <div>{{ icon('doc') }}<b>Informasi Lengkap</b><span>Kategori risiko, penjelasan, dan rekomendasi.</span></div>
+ <div>{{ icon('lock') }}<b>Mudah Digunakan</b><span>Cukup masukkan URL.</span></div>
+</div></div>
+<div style="height:56px"></div>
+{% endblock %}

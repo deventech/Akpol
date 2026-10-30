@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block title %}Edukasi - SCAMGUARD{% endblock %}
+{% block content %}
+<div class="wrap pg"><div class="card">
+ <h2>Edukasi Keamanan</h2>
+ <p class="sub">Kenali tanda-tanda phishing dan tingkatkan kewaspadaan Anda di internet.</p>
+ <h3>Tips menghindari phishing</h3>
+ <div class="tips">
+  {% for ic, t, d in [('link','Jangan klik tautan sembarangan','Periksa sumber tautan sebelum membukanya.'),('search','Periksa alamat website','Perhatikan ejaan domain dan pastikan memakai HTTPS.'),('lock','Jangan bagikan informasi pribadi','Kata sandi, OTP, dan PIN tidak pernah diminta lewat tautan.'),('alert','Waspadai pesan mencurigakan','Pesan yang mendesak atau menjanjikan hadiah patut dicurigai.')] %}
+  <div class="tip">{{ icon(ic) }}<div><b>{{ t }}</b><span>{{ d }}</span></div></div>
+  {% endfor %}
+ </div>
+ <div class="ingat">{{ icon('shield') }}<div><b>Ingat!</b> Jika ragu, jangan klik. Cek dulu dengan SCAMGUARD.</div></div>
+</div></div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block title %}Periksa URL - SCAMGUARD{% endblock %}
+{% block content %}
+<div class="wrap pg"><div class="card check">
+ <h2>Periksa URL</h2>
+ <p class="sub">Masukkan URL yang ingin Anda periksa untuk mengetahui apakah aman atau berisiko.</p>
+ <form class="field" data-form method="post" action="{{ url_for('check.check') }}"><input type="text" name="url" value="{{ url or '' }}" aria-label="URL yang ingin diperiksa" placeholder="https://contoh-website.com" autocomplete="off"><button class="btn">Periksa URL</button></form>
+ <div class="err" role="alert">{{ error or '' }}</div>
+ <div class="chips"><small>Contoh URL yang bisa dicoba:</small>
+  {% for ex in ['https://google.com','https://www.bank.com','https://bit.ly/abc123','http://login-update.com/verify','http://paypal.secure-login.xyz/account'] %}
+  <button type="button" class="chip" data-ex="{{ ex }}">{{ ex }}</button>
+  {% endfor %}
+ </div>
+</div></div>
+{% endblock %}

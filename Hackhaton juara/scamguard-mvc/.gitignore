@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+data_pipeline/raw/*
+!data_pipeline/raw/.gitkeep

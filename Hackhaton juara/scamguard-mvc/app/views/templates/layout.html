@@ -1,0 +1,27 @@
+{% from '_icons.html' import icon %}
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}SCAMGUARD - Cek Tautan, Hindari Ancaman{% endblock %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<nav><div class="nav">
+ <a class="logo" href="{{ url_for('page.home') }}">{{ icon('shield') }}SCAMGUARD</a>
+ <div class="links">
+  {% set ep = request.endpoint %}
+  <a href="{{ url_for('page.home') }}" class="{{ 'on' if ep=='page.home' }}">Beranda</a>
+  <a href="{{ url_for('page.how') }}" class="{{ 'on' if ep=='page.how' }}">Cara Kerja</a>
+  <a href="{{ url_for('page.education') }}" class="{{ 'on' if ep=='page.education' }}">Edukasi</a>
+  <a href="{{ url_for('page.about') }}" class="{{ 'on' if ep=='page.about' }}">Tentang</a>
+ </div>
+ <a class="btn" href="{{ url_for('check.check') }}">Periksa URL</a>
+</div></nav>
+{% block content %}{% endblock %}
+<footer>&copy; 2026 SCAMGUARD &middot; Tim Akpoll &middot; Politeknik Negeri Jember</footer>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
