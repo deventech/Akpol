@@ -1,0 +1,2 @@
+source_url,source_category,risk_level,risk_label,source,notes,page_title,meta_description,extracted_text,link_count,scrape_status,error_message,scraped_at,headings_json,links_json
+https://this-domain-should-not-exist-xyz123.invalid,unknown,1,ragu-ragu,manual,Expected to fail DNS,,,,0,failed,URL blocked by safety policy: DNS resolution failed: [Errno -2] Name or service not known,2026-10-30T07:51:13Z,"{""h1"": [], ""h2"": [], ""h3"": []}",[]

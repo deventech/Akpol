@@ -1,0 +1,6 @@
+url,source_category,source,notes
+https://example.com,legitimate,manual,IANA example domain
+https://www.wikipedia.org,legitimate,manual,Public encyclopedia
+https://httpbin.org/html,legitimate,manual,HTTP testing service
+https://example.org,legitimate,manual,Another example domain
+https://this-domain-should-not-exist-xyz123.invalid,unknown,manual,Expected to fail DNS
