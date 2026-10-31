@@ -33,22 +33,21 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-# Pemetaan kategori sumber → level risiko (untuk kolom Excel)
-# Level 0 = aman
-# Level 1 = ragu-ragu
-# Level 2 = tidak aman / berisiko
+# Pemetaan kategori sumber → label risiko (untuk kolom Excel di AKHIR)
+# Label: rendah | sedang | tinggi
+# Kategori: legitimate | unknown | online_gambling | phishing
 RISK_LEVEL_MAP = {
-    "legitimate": (0, "aman"),
-    "unknown": (1, "ragu-ragu"),
-    "online_gambling": (1, "ragu-ragu"),  # dipisah dari phishing, tapi tetap waspada
-    "phishing": (2, "tidak aman"),
+    "legitimate": (0, "rendah"),
+    "unknown": (1, "sedang"),
+    "online_gambling": (1, "sedang"),
+    "phishing": (2, "tinggi"),
 }
 
 
 def category_to_risk(category: str) -> tuple[int, str]:
     """Return (risk_level, risk_label) from source_category. Tidak mengarang dari konten scrape."""
     cat = (category or "unknown").strip().lower()
-    return RISK_LEVEL_MAP.get(cat, (1, "ragu-ragu"))
+    return RISK_LEVEL_MAP.get(cat, (1, "sedang"))
 
 
 def build_record(
@@ -148,6 +147,9 @@ def _flatten_records(records: list[dict]) -> list[dict]:
         row.pop("headings", None)
         row.pop("links", None)
         row.pop("images", None)
+        # hapus alias lama biar Excel rapi (pakai url/title/text_content)
+        for alias in ("source_url", "page_title", "extracted_text"):
+            row.pop(alias, None)
         rows.append(row)
     return rows
 
@@ -159,16 +161,12 @@ def write_csv(records: list[dict], path: Path) -> None:
         return
 
     fieldnames = [
-        # MCP-style
+        # MCP-style & konten dulu
         "url",
         "title",
         "meta_description",
         "text_content",
         "success",
-        # SCAMGUARD labels
-        "source_category",
-        "risk_level",
-        "risk_label",
         "source",
         "notes",
         "keywords",
@@ -186,6 +184,10 @@ def write_csv(records: list[dict], path: Path) -> None:
         "scrape_status",
         "error_message",
         "scraped_at",
+        # kategori & label di AKHIR Excel
+        "source_category",
+        "risk_level",
+        "risk_label",
     ]
     with path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
@@ -210,12 +212,13 @@ def write_xlsx(records: list[dict], path: Path) -> None:
     # Prefer column order
     preferred = [
         "url", "title", "meta_description", "text_content", "success",
-        "source_category", "risk_level", "risk_label",
         "source", "notes", "keywords",
         "canonical_url", "og_site_name", "og_title", "og_description", "og_image",
         "headings_json", "links_json", "link_count",
         "images_json", "image_count", "html_length",
         "scrape_status", "error_message", "scraped_at",
+        # kategori dulu, lalu label — di AKHIR
+        "source_category", "risk_level", "risk_label",
     ]
     cols = [c for c in preferred if c in df.columns] + [c for c in df.columns if c not in preferred]
     df = df[cols]

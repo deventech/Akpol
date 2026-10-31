@@ -102,20 +102,20 @@ def clean_records(records: list[dict[str, Any]]) -> dict[str, list[dict]]:
         # Pastikan risk_level / risk_label ada (untuk file lama yang belum punya)
         cat = new["source_category"]
         risk_map = {
-            "legitimate": (0, "aman"),
-            "unknown": (1, "ragu-ragu"),
-            "online_gambling": (1, "ragu-ragu"),
-            "phishing": (2, "tidak aman"),
+            "legitimate": (0, "rendah"),
+            "unknown": (1, "sedang"),
+            "online_gambling": (1, "sedang"),
+            "phishing": (2, "tinggi"),
         }
         if "risk_level" not in new or new.get("risk_level") is None or str(new.get("risk_level")) == "nan":
-            new["risk_level"], new["risk_label"] = risk_map.get(cat, (1, "ragu-ragu"))
+            new["risk_level"], new["risk_label"] = risk_map.get(cat, (1, "sedang"))
         else:
             try:
                 new["risk_level"] = int(float(new["risk_level"]))
             except (TypeError, ValueError):
-                new["risk_level"], new["risk_label"] = risk_map.get(cat, (1, "ragu-ragu"))
-            if not new.get("risk_label") or str(new.get("risk_label")) == "nan":
-                new["risk_label"] = risk_map.get(cat, (1, "ragu-ragu"))[1]
+                new["risk_level"], new["risk_label"] = risk_map.get(cat, (1, "sedang"))
+            if not new.get("risk_label") or str(new.get("risk_label")) in ("nan", "aman", "ragu-ragu", "tidak aman"):
+                new["risk_label"] = risk_map.get(cat, (1, "sedang"))[1]
 
         # headings may be dict or already string
         headings = rec.get("headings")

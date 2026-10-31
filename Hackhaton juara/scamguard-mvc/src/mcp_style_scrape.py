@@ -94,12 +94,13 @@ def append_and_save(records: list[dict], xlsx_path: Path, jsonl_path: Path, csv_
 
     preferred = [
         "url", "title", "meta_description", "text_content", "success",
-        "source_category", "risk_level", "risk_label",
         "source", "notes", "keywords",
         "canonical_url", "og_site_name", "og_title", "og_description", "og_image",
         "headings_json", "links_json", "link_count",
         "images_json", "image_count", "html_length",
         "scrape_status", "error_message", "scraped_at",
+        # kategori dulu, lalu label — di AKHIR
+        "source_category", "risk_level", "risk_label",
     ]
     cols = [c for c in preferred if c in df.columns] + [c for c in df.columns if c not in preferred]
     if cols:
